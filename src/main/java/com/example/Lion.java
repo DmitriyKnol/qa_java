@@ -16,10 +16,14 @@ public class Lion {
         }
     }
 
-    Feline feline = new Feline();
-
+    Predator predator;
+    Kittens kittens;
+    public Lion(Feline feline) {
+        this.predator = feline;
+        this.kittens = feline;
+    }
     public int getKittens() {
-        return feline.getKittens();
+        return kittens.getKittens();
     }
 
     public boolean doesHaveMane() {
@@ -27,6 +31,6 @@ public class Lion {
     }
 
     public List<String> getFood() throws Exception {
-        return feline.getFood("Хищник");
+        return predator.eatMeat();
     }
 }
