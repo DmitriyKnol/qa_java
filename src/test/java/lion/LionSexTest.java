@@ -1,19 +1,23 @@
 package lion;
 
+import com.example.Feline;
 import com.example.Lion;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class LionTestSex {
+public class LionSexTest {
 
     private final String sex;
     private final boolean hasMane;
 
-    public LionTestSex(String sex, boolean hasMane) {
+    public LionSexTest(String sex, boolean hasMane) {
         this.sex = sex;
         this.hasMane = hasMane;
     }
@@ -26,18 +30,26 @@ public class LionTestSex {
         };
     }
 
+    @Mock
+    Feline feline;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
             public void setSexOfLion() throws Exception {
 
         if (!sex.equals("Самец") && !sex.equals("Самка")) {
             try {
-                Lion lion = new Lion(sex);
+                Lion lion = new Lion(sex, feline);
                 lion.doesHaveMane();
             } catch (Exception e) {
                 assertEquals("Используйте допустимые значения пола животного - самей или самка", e.getMessage());
             }
         } else {
-            Lion lion = new Lion(sex);
+            Lion lion = new Lion(sex, feline);
             assertEquals(hasMane,lion.doesHaveMane());
         }
     }
