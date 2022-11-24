@@ -26,7 +26,6 @@ public class LionSexTest {
          return new Object[][]{
                  {"Самец", true},
                  {"Самка", false},
-                 {"Найденыш", true}
         };
     }
 
@@ -40,17 +39,7 @@ public class LionSexTest {
 
     @Test
             public void setSexOfLion() throws Exception {
-
-        if (!sex.equals("Самец") && !sex.equals("Самка")) {
-            try {
-                Lion lion = new Lion(sex, feline);
-                lion.doesHaveMane();
-            } catch (Exception e) {
-                assertEquals("Используйте допустимые значения пола животного - самей или самка", e.getMessage());
-            }
-        } else {
             Lion lion = new Lion(sex, feline);
             assertEquals(hasMane,lion.doesHaveMane());
-        }
-    }
+            }
 }

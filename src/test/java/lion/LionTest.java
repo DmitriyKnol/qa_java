@@ -11,13 +11,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
 
     @Mock
     Feline feline;
-    private String sex = "Самец";
+    private final String sex = "Самец";
 
     @Test
     public void getFoodLionIsPredator() throws Exception {
@@ -31,5 +33,11 @@ public class LionTest {
         Lion lion = new Lion(sex, feline);
         Mockito.when(feline.getKittens()).thenReturn(1);
         assertEquals(1,lion.getKittens());
+    }
+    @Test
+    public void LionTestException() {
+        Exception actualException = assertThrows(Exception.class, () ->
+                new Lion("Найденыш", feline));
+        assertEquals("Используйте допустимые значения пола животного - самей или самка", actualException.getMessage());
     }
 }
